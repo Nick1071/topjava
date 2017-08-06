@@ -1,5 +1,8 @@
 <%@ page import="ru.javawebinar.topjava.util.MealsUtil" %>
 <%@ page import="ru.javawebinar.topjava.model.Meal" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ru.javawebinar.topjava.model.MealWithExceed" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,11 +24,12 @@
         </td>
     </tr>
 
-    <% for(Meal meal : MealsUtil.meals){%>
+    <% for(MealWithExceed meal : (List<MealWithExceed>)request.getAttribute("meals")){%>
 
-    <tr>
+    <tr style = <% if(meal.isExceed()) {%> "color:red" <%} else {%> "color:green"<%}%>>
         <td>
-            <%= meal.getDateTime()%>
+            <%= meal.getDateTime().toLocalDate() + " " + meal.getDateTime().toLocalTime()%>
+        </td>
         <td>
             <%= meal.getDescription()%>
         </td>
