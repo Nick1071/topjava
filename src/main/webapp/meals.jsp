@@ -1,17 +1,24 @@
-<%@ page import="ru.javawebinar.topjava.util.MealsUtil" %>
-<%@ page import="ru.javawebinar.topjava.model.Meal" %>
-<%@ page import="java.util.List" %>
-<%@ page import="ru.javawebinar.topjava.model.MealWithExceed" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Meals</title>
+    <style type="text/css">
+        .s1 {
+            color: green
+        }
+
+        .s2 {
+            color: red
+        }
+    </style>
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Meals</h2>
+
 <table border="1">
+    <thead>
     <tr>
         <td>
             Date
@@ -23,20 +30,22 @@
             Calories
         </td>
     </tr>
+    </thead>
 
-    <% for(MealWithExceed meal : (List<MealWithExceed>)request.getAttribute("meals")){%>
-
-    <tr style = <% if(meal.isExceed()) {%> "color:red" <%} else {%> "color:green"<%}%>>
-        <td>
-            <%= meal.getDateTime().toLocalDate() + " " + meal.getDateTime().toLocalTime()%>
-        </td>
-        <td>
-            <%= meal.getDescription()%>
-        </td>
-        <td>
-            <%= meal.getCalories()%>
-        </td>
-    </tr><%}%>
+    <c:forEach items="${meals}" var="meal">
+        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
+        <tr class="${meal.exceed ? 's2':'s1'} ">
+            <td>
+                    ${meal.dateTime}
+            </td>
+            <td>
+                    ${meal.description}
+            </td>
+            <td>
+                    ${meal.calories}
+            </td>
+        </tr>
+    </c:forEach>
 
 </table>
 </body>
