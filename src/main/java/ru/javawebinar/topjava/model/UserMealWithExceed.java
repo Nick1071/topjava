@@ -3,11 +3,11 @@ package ru.javawebinar.topjava.model;
 import java.time.LocalDateTime;
 
 public class UserMealWithExceed {
-    protected Integer id;
     protected final LocalDateTime dateTime;
     protected final String description;
     protected final int calories;
     protected final boolean exceed;
+    protected Integer id;
 
     public UserMealWithExceed(LocalDateTime dateTime, String
             description, int calories, boolean exceed) {
@@ -21,10 +21,6 @@ public class UserMealWithExceed {
         this.description = description;
         this.calories = calories;
         this.exceed = exceed;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public LocalDateTime getDateTime() {
@@ -45,6 +41,10 @@ public class UserMealWithExceed {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

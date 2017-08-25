@@ -25,7 +25,7 @@ public class InMemoryUserMealRepository implements UserMealRepository {
 
     @Override
     public UserMeal save(UserMeal userMeal) {
-        if(userMeal.isNew())
+        if (userMeal.isNew())
             userMeal.setId(counter.incrementAndGet());
         return repository.put(userMeal.getId(), userMeal);
     }

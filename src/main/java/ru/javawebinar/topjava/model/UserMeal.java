@@ -6,20 +6,13 @@ import java.time.LocalTime;
 
 public class UserMeal {
 
-    protected Integer id;
-
     protected final LocalDateTime dateTime;
-
     protected final String description;
-
     protected final int calories;
+    protected Integer id;
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public UserMeal(Integer id, LocalDateTime dateTime, String description, int calories) {
@@ -53,7 +46,11 @@ public class UserMeal {
         return id;
     }
 
-    public boolean isNew(){
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isNew() {
         return id == null;
     }
 
