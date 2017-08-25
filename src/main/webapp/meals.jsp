@@ -15,11 +15,17 @@
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
-<h2>Meals</h2>
+<h2>Meal list</h2>
+
+
+<h3><a href="meals?action=creat">Add Meal</a></h3>
 
 <table border="1">
     <thead>
     <tr>
+        <td>
+            Id
+        </td>
         <td>
             Date
         </td>
@@ -33,8 +39,11 @@
     </thead>
 
     <c:forEach items="${meals}" var="meal">
-        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
+        <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.UserMealWithExceed"/>
         <tr class="${meal.exceed ? 's2':'s1'} ">
+            <td>
+                ${meal.id}
+            </td>
             <td>
                     ${meal.dateTime}
             </td>
@@ -44,9 +53,16 @@
             <td>
                     ${meal.calories}
             </td>
+            <td>
+                <a href="meals?action=update&id=${meal.id}">Update</a>
+            </td>
+            <td>
+                <a href="meals?action=delete&id=${meal.id}">Delete</a>
+            </td>
         </tr>
     </c:forEach>
 
 </table>
+
 </body>
 </html>

@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.util;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * GKislin
@@ -11,5 +13,9 @@ public class TimeUtil {
         if(startTime == null) startTime = LocalTime.MIN;
         if (endTime == null) endTime = LocalTime.MAX;
         return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
+    }
+    public static String toString(LocalDateTime localDateTime){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return localDateTime.format(dateTimeFormatter);
     }
 }
