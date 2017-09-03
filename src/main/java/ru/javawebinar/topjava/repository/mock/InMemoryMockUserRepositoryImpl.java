@@ -8,9 +8,11 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryMockUserRepositoryImpl implements UserRepository {
@@ -48,9 +50,9 @@ public class InMemoryMockUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Collection<User> getAll() {
+    public List<User> getAll() {
         log.info("getAll");
-        return repository.values();
+        return repository.values().stream().collect(Collectors.toList());
     }
 
     @Override

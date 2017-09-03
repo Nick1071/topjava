@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -50,7 +51,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     @Override
     public boolean delete(int id, int userId) {
         Map<Integer, Meal> userMeal = repository.get(userId);
-        return userMeal != null && repository.remove(userId) != null;
+        return userMeal != null && userMeal.remove(id) != null;
     }
 
     @Override
@@ -60,12 +61,16 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Collection<Meal> getAll(int userId) {
-        return repository.get(userId).values().stream().sorted(USER_MEAL_COMPARATOR).collect(Collectors.toList());
+    public List<Meal> getAll(int userId) {
+        return repository.get(userId)
+                .values()
+                .stream()
+                .sorted(USER_MEAL_COMPARATOR)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Collection<Meal> getBetween(LocalDateTime date1, LocalDateTime date2, int userId) {
+    public List<Meal> getBetween(LocalDateTime date1, LocalDateTime date2, int userId) {
         return repository.get(userId).values().stream()
                 .filter(meal -> DateTimeUtil.isBetween(meal.getDateTime(), date1, date2))
                 .sorted(USER_MEAL_COMPARATOR).collect(Collectors.toList());
