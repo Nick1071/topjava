@@ -7,9 +7,13 @@ import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.MealService;
+import ru.javawebinar.topjava.to.MealWithExceed;
+import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -55,5 +59,10 @@ public class MealRestController {
 
     }
 
+    public List<MealWithExceed> getBetweenDateTimes(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+        int userId = AuthorizedUser.id();
+        LOG.info("get meel date between {} and {}, time between {} and {} for user {}", startDate, endDate, startTime, endTime, userId);
+        return MealsUtil.getFilteredWithExceeded(service.getBetweenDates(startDate, endDate, userId), startTime, endTime, AuthorizedUser.getCaloriesPerDay());
+    }
 
-}
+    }
