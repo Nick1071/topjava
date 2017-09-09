@@ -36,12 +36,6 @@ public class MealRestController {
         return service.getAll(userId);
     };
 
-    public void deleteAll(){
-        int userId = AuthorizedUser.id();
-        LOG.info("delete all meel for user {}", userId);
-        service.deletteAll(userId);
-    }
-
     public Meal update(Meal meal){
         int userId = AuthorizedUser.id();
         LOG.info("update meel {} for user {}", meal, userId);

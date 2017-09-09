@@ -24,6 +24,4 @@ public interface MealService {
     List<Meal> getBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId);
 
     List<Meal> getAll(int userId);
-
-    void deletteAll(int userId);
 }
