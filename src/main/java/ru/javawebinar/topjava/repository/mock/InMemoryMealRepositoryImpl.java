@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.MealRepository;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 import static ru.javawebinar.topjava.repository.mock.InMemoryMockUserRepositoryImpl.ADMIN_ID;
 import static ru.javawebinar.topjava.repository.mock.InMemoryMockUserRepositoryImpl.USER_ID;
 
+@Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
 
     private static final Comparator<Meal> USER_MEAL_COMPARATOR
